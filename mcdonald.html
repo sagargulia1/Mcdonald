@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mc Donalds</title>
+</head>
+
+<style>
+    #maindiv{
+        background-color: rgb(234, 248, 37);
+        width: auto;
+        min-height: 700px;
+        display: flex;
+        border-radius: 40px;
+    }
+    #orderdiv{
+        background-color: rgb(247, 122, 39);
+        width: 60%;
+        text-align: center;
+        border-radius: 40px;
+    }
+    #h1 {
+        color: rgb(231, 240, 241);
+        font-family: monospace;
+        font-weight: 1900;
+        font-size: 60px;
+    }
+    #h3{
+        color: rgb(8, 22, 19);
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: 1900;
+        font-size: 25px;
+    }
+    #button{
+        font-size: 20px;
+       font-weight: bold;
+       border-radius: 10px;
+    }
+    #delivery_div{
+        width: 40%;
+        background-color: #f3f059;
+    }
+    #menum{
+        display: grid;
+        width: 100%;
+        text-align: center;
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: auto;
+        grid-gap: 8px;
+    }
+
+    #imaged{
+        display: grid;
+        margin-left: 10%;
+        width: 80%;
+        margin-top: 100px;
+        grid-template-columns: repeat(3,1fr);
+        grid-gap: 10px;
+    }
+     #imgss{
+     height: 100px;  
+    }
+    #imgr11{
+    min-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    }
+ 
+</style>
+
+
+<body>
+
+    <div id="maindiv">
+
+        <div id="orderdiv">
+            <h1 id="h1">Mc Donalds</h1>
+            <h3 id="h3">Make your order here</h3>
+            <button id="button" onclick="make_order()">Menu Card</button>
+            <div id="menum"></div>
+        </div>
+
+        <div id="delivery_div"></div>
+
+    </div>
+    
+</body>
+</html>
+
+<script>
+    var food_menu = [
+        {
+            name:"Momos",
+            img:"https://geekrobocook.com/wp-content/uploads/2021/04/Fried-veg-momos.jpg",
+            id:1
+        },
+        {
+            name:"Biriyani",
+            img:"https://th.bing.com/th/id/OIP.N6OwFpLxOMS-YnDjCuLr2gHaEu?pid=ImgDet&rs=1",
+            id:2
+        },
+        {
+            name:"Pizza ",
+            img:"https://img.onmanorama.com/content/dam/mm/en/food/features/images/2021/10/17/pizza.jpg",
+            id:3
+        },
+        {
+            name:"Burger",
+            img:"https://www.chicken.ca/wp-content/uploads/2020/09/Moist-Chicken-Burgers.jpg",
+            id:4
+        },
+        {
+            name:"Fries",
+            img:"https://www.dinneratthezoo.com/wp-content/uploads/2019/12/homemade-french-fries-5-500x500.jpg",
+            id:5
+        },
+        {
+            name:"Fries",
+            img:"https://spicecravings.com/wp-content/uploads/2020/12/Chicken-Kathi-Roll-Featured-1.jpg",
+            id:6
+        },
+        {
+            name:"Chappathi",
+            img:"https://th.bing.com/th/id/OIP.5q17-zwyRDX5puf1Blp7NQHaEK?w=322&h=181&c=7&r=0&o=5&dpr=1.25&pid=1.7",
+            id:7
+        },
+        {
+            name:"Garlic bread",
+            img:"https://i.ytimg.com/vi/ZxZO9wdOHPU/maxresdefault.jpg",
+            id:8
+        },
+        {
+            name:"Chow mein",
+            img:"https://1.bp.blogspot.com/-cygdF3fOlbQ/XQIQuLgl3BI/AAAAAAAAJ4M/Mtj7I1FsufE8zXJ03NWbQs9KA9duPFqyQCEwYBhgL/s1600/best%2Bchinese%2Bchow%2Bmein%2Brecipe%2B%25281%2529.jpg",
+            id:9
+        },
+        {
+            name:"Tikka",
+            img:"https://www.thespruceeats.com/thmb/9UPM7SqWqojXrawRfbcOLqpX5qg=/1500x1000/filters:no_upscale()/chicken-tikka-recipe-1957388-Final-5bb021874cedfd0026da89fd.jpg",
+            id:10
+        }
+        
+    ]
+
+    function make_order(){
+        
+        document.getElementById("menum").innerHTML=""
+
+        food_menu.map(function(menu,index){  
+
+        let order_imgdiv=document.createElement("div");
+        order_imgdiv.style.border="solid"
+        order_imgdiv.style.height="200px"
+        order_imgdiv.style.textAlign="center"
+
+        let imgdiv=document.createElement("div")
+        imgdiv.style.height="130px"
+
+        let order_pic=document.createElement("img");
+        order_pic.style.minWidth="100%"
+        order_pic.style.maxHeight="100%"
+
+        let order_name=document.createElement("h4");
+        order_name.style.color="#fff6ed"
+        order_pic.src=menu.img
+        order_name.textContent=menu.name
+
+        let check_div=document.createElement("input")
+        check_div.setAttribute("type","checkbox")
+        check_div.addEventListener("change",function(){
+            find_it(menu)
+        })
+
+        document.getElementById("menum").append(order_imgdiv,)
+        order_imgdiv.append(imgdiv,order_name,check_div)
+        imgdiv.append(order_pic)
+        });
+
+        let submit_food =document.createElement("Button")
+        
+        submit_food.textContent="Order Food"
+        document.getElementById("menum").append(submit_food)
+        submit_food.style.width="150px"
+        submit_food.style.height="40px"
+        submit_food.style.marginTop="80px"
+        submit_food.style.marginleft="100px"
+        submit_food.style.fontWeight="bold"
+        submit_food.addEventListener("click",order_food)
+    }
+
+    let arrx=[];
+    function find_it(menu) {
+        if(arrx.length==0) {
+            arrx.push(menu)
+        }
+        else {     
+            let a=0;
+     for(let i=0;i<arrx.length;i++){
+        if(arrx[i].id==menu.id){
+        remove_it(i)
+        a++
+    }
+}
+
+function remove_it(x){
+    arrx.splice(x,1)
+}
+if(a==0){
+    arrx.push(menu)
+}          
+}  
+
+}
+    var orderarr=[]
+    let b=1;
+    function order_food(){
+        if(arrx.length>0){
+            document.getElementById("menum").innerHTML=""
+            setTimeout(function(){
+                let orobj={
+            order_id:b,
+            order_make:arrx  
+        }
+        b++
+orderarr.push(orobj)
+ arrx=[]
+        let thank=document.createElement("h3")
+        thank.textContent="Thanks For Your Order Revisit Again"
+        thank.style.color="#cee911"
+        document.getElementById("menum").append(thank)
+      setTimeout(function(){
+        document.getElementById("menum").innerHTML=""
+      },1000)
+        let promise = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+      console.log(orderarr[0].order_id ,orobj.order_id)
+    if (orderarr[0].order_id === orobj.order_id) {     
+      resolve(true);
+    }
+  },5000);
+});
+promise.then(function (res) {
+  if(res==true){
+    document.getElementById("delivery_div").innerHTML=""
+    let idnum=document.createElement("h1")
+    idnum.textContent=`Id:${orobj.order_id}`
+    idnum.style.color="#cee911"
+    idnum.style.marginLeft="500px"
+
+    let img_ddiv=document.createElement("div")
+    img_ddiv.setAttribute("id","imaged")
+    document.getElementById("delivery_div").append(idnum,img_ddiv)
+
+    let imgd=orobj.order_make
+    for(o in imgd){
+
+    let imgss=document.createElement("div")
+    imgss.setAttribute("id","imgss")
+
+    let imgr11=document.createElement("img")
+    imgr11.src=imgd[o].img
+    imgr11.setAttribute("id","imgr11")
+    document.getElementById("imaged").append(imgss)
+    imgss.append(imgr11) 
+ } 
+  }
+});
+function start_delete() {
+
+    orderarr.shift();
+if (orderarr.length === 0) {
+  clearInterval(interval);
+}
+}
+var interval = setInterval(start_delete, 8000);
+        })
+           
+        }else{
+            alert("Plz Select Any Dish")
+        }  
+    }
+</script>
